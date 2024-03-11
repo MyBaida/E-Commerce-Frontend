@@ -1,15 +1,14 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux'
 
 import {composeWithDevTools} from '@redux-devtools/extension'
 
 import {configureStore} from '@reduxjs/toolkit'
 import productReducers from './reducers/productReducers'
 import { productListReducer , productDetailsReducer} from './reducers/productReducers'
+import { cartReducer } from './reducers/cartReducers'
+import {thunk} from 'redux-thunk';
+import { loadState, saveState } from './localStorage'
 
-
-
-
-const initialState = {}
+const persistedState = loadState()
 
 
 
@@ -18,8 +17,23 @@ const store = configureStore({
     reducer: {
         productList: productListReducer,
         productDetails: productDetailsReducer,
+        cart: cartReducer,
       
-    }
+    },
+        
+    preloadedState: persistedState,
+  })
+  store.subscribe(() => {
+    saveState(store.getState())
   })
 
+  const cartItemsFromStorage = localStorage.getItem('cartItems') ? 
+          JSON.parse(localStorage.getItem('cartItems')) : []
+
+
+          const initialState = {
+            cart: {cartItems: cartItemsFromStorage},
+          }
+
+          
 export default store;
