@@ -10,11 +10,13 @@ import { useNavigate } from 'react-router-dom'
 const CartScreen = (location) => {
   const { id, qty } = useParams()
   const navigate = useNavigate()
+  
+  
 
   const dispatch = useDispatch()
 
-  const cart = useSelector((state) => state.cart)
-  const { cartItems } = cart
+  const ship = useSelector((state) => state.ship)
+  const { cartItems } = ship
 
 
   const [, forceUpdate] = useReducer(x => x + 1, 0)
@@ -31,7 +33,9 @@ const CartScreen = (location) => {
 
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems))
-  }, [cartItems] )
+    forceUpdate()
+  }, [cartItems] );
+  
 
 
   const removeFromCartHandler =(id) =>{
@@ -41,6 +45,7 @@ dispatch(removeFromCart(id))
 
   const checkoutHandler = () =>{
       navigate(`/login?redirect=shipping`)
+      
   
   }
 
@@ -97,19 +102,19 @@ dispatch(removeFromCart(id))
           )}
        </Col>
        
+       
         
         
         <Col md={4}>
             <Card>
                 <ListGroup variant="flush">
                     <ListGroup.Item>
-                        <h2>Subotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
+                        <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.qty, 0)}) items</h2>
+                        
                        GHS {cartItems.reduce((acc, item) => acc + item.qty* item.price, 0).toFixed(2)}
                         
                     </ListGroup.Item>
-                    <ListGroup.Item>
-                        <h3>GHS {cart.totalPrice}</h3>
-                    </ListGroup.Item>
+                   
                     <ListGroup.Item>
                         
                             <Button 

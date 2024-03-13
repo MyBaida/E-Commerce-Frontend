@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { listProductDetails } from '../actions/productActions';
 import Message from '../Components/Message';
 import Loader from '../Components/Loader';
-
+import { addToCart } from '../actions/cartActions'
 
 
 
@@ -29,9 +29,10 @@ const ProductScreen = () => {
     dispatch(listProductDetails(id));
   }, [dispatch, id]);
 
-    const addToCartHandler =() =>{
-          navigate(`/cart/${id}?qty=${qty}`)
-    }
+  const addToCartHandler = () => {
+    dispatch(addToCart(id, qty))
+    navigate(`/cart/${id}?qty=${qty}`)
+  }
 
   return (
     <div>

@@ -7,6 +7,9 @@ import { productListReducer , productDetailsReducer} from './reducers/productRed
 import { cartReducer } from './reducers/cartReducers'
 import {thunk} from 'redux-thunk';
 import { loadState, saveState } from './localStorage'
+import {userLoginReducer} from '../src/reducers/userReducers';
+
+
 
 const persistedState = loadState()
 
@@ -18,6 +21,8 @@ const store = configureStore({
         productList: productListReducer,
         productDetails: productDetailsReducer,
         cart: cartReducer,
+        ship: cartReducer,
+        userLogin: userLoginReducer
       
     },
         
@@ -29,10 +34,23 @@ const store = configureStore({
 
   const cartItemsFromStorage = localStorage.getItem('cartItems') ? 
           JSON.parse(localStorage.getItem('cartItems')) : []
+  
+  const shippingAddressFromStorage = localStorage.getItem('shippingAddress') ? 
+          JSON.parse(localStorage.getItem('shippingAddress')) : {}
+
+          const userInfoFromStorage = localStorage.getItem('userInfo') ? 
+          JSON.parse(localStorage.getItem('userInfo')) : []
+
 
 
           const initialState = {
-            cart: {cartItems: cartItemsFromStorage},
+        cart: {cartItems: cartItemsFromStorage, 
+        shippingAddress: shippingAddressFromStorage
+      },
+      userLogin:{userInfo: userInfoFromStorage}
+
+        
+
           }
 
           
