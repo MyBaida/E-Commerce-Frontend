@@ -7,7 +7,7 @@ import { productListReducer , productDetailsReducer} from './reducers/productRed
 import { cartReducer } from './reducers/cartReducers'
 import {thunk} from 'redux-thunk';
 import { loadState, saveState } from './localStorage'
-import {userLoginReducer} from '../src/reducers/userReducers';
+import {userLoginReducer, userRegisterReducer} from '../src/reducers/userReducers';
 
 
 
@@ -22,8 +22,8 @@ const store = configureStore({
         productDetails: productDetailsReducer,
         cart: cartReducer,
         ship: cartReducer,
-        userLogin: userLoginReducer
-      
+        userLogin: userLoginReducer,
+        userRegister: userRegisterReducer
     },
         
     preloadedState: persistedState,
