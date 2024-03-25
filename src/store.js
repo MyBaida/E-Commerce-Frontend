@@ -3,11 +3,11 @@ import {composeWithDevTools} from '@redux-devtools/extension'
 
 import {configureStore} from '@reduxjs/toolkit'
 import productReducers from './reducers/productReducers'
-import { productListReducer , productDetailsReducer} from './reducers/productReducers'
+import { productListReducer , productDetailsReducer, productDeleteReducer, productCreateReducer} from './reducers/productReducers'
 import { cartReducer } from './reducers/cartReducers'
 import {thunk} from 'redux-thunk';
 import { loadState, saveState } from './localStorage'
-import {userLoginReducer, userRegisterReducer} from '../src/reducers/userReducers';
+import {userLoginReducer, userRegisterReducer, userListReducer, userDeleteReducer, userDetailsReducer, userUpdateProfileReducer} from '../src/reducers/userReducers';
 
 
 
@@ -23,7 +23,14 @@ const store = configureStore({
         cart: cartReducer,
         ship: cartReducer,
         userLogin: userLoginReducer,
-        userRegister: userRegisterReducer
+        userRegister: userRegisterReducer,
+        userList:userListReducer,
+        userDelete: userDeleteReducer,
+        userDetails: userDetailsReducer,
+        userUpdateProfile: userUpdateProfileReducer,
+        productDelete: productDeleteReducer,
+        productCreate: productCreateReducer,
+
     },
         
     preloadedState: persistedState,
