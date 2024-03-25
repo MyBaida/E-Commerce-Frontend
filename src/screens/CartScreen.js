@@ -55,7 +55,7 @@ dispatch(removeFromCart(id))
         <Col md={8}>
           <h1>Shopping Cart</h1>
           {cartItems.length === 0 ? (
-    <h3>Your cart is empty <Link to ='/'> Go back</Link></h3>
+    <Message variant='info'>Your cart is empty <Link to ='/'> Go back</Link></Message>
           ) : (
             <ListGroup variant="flush">
               {cartItems.map((item) => (
