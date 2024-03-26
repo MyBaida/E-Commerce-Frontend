@@ -21,7 +21,6 @@ import {USER_LOGIN_REQUEST,
         USER_UPDATE_PROFILE_FAIL,
         USER_UPDATE_PROFILE_RESET,
         } from '../constants/userConstants';
-import {CART_SHIPPING_ADDRESS_RESET} from '../constants/cartConstants';  
 import axios from 'axios';
 import { ORDER_LIST_MY_RESET } from '../constants/orderConstants';
 
@@ -67,7 +66,6 @@ export const logout = () => (dispatch) => {
     dispatch( {type : USER_LIST_RESET})
     dispatch( {type : USER_DETAILS_RESET})
     dispatch( {type : ORDER_LIST_MY_RESET})
-    dispatch( {type: CART_SHIPPING_ADDRESS_RESET})
 } 
 
 

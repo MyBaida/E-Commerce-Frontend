@@ -9,7 +9,6 @@ import { logout } from '../actions/userActions'
 
 
 
-
 const Header = () => {
 
   const userLogin = useSelector(state => state.userLogin)
@@ -19,7 +18,6 @@ const Header = () => {
 
   const logoutHandler = () => {
     dispatch(logout())
-    
   }
 
   return (
