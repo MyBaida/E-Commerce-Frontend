@@ -44,6 +44,7 @@ function ProfileScreen() {
                     dispatch({type: USER_UPDATE_PROFILE_RESET})
                     dispatch(getUserDetails('profile'))
                     dispatch(listMyOrders())
+                    
                 }else{
                     setName(user.name)
                     setEmail(user.email)
