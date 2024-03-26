@@ -86,11 +86,11 @@ console.log('Received order object:', order)
                     <ListGroup.Item>
                         <h2>Order Items</h2>
 
-                        {cart.cartItems.length === 0 ? 
+                        {ship.cartItems.length === 0 ? 
                         <h3>Your cart is empty</h3>
                         :(
                            <ListGroup variant='flush'>
-                               {cart.cartItems.map((item, index) => (
+                               {ship.cartItems.map((item, index) => (
                                    <ListGroup.Item key={index}>
                                         <Row>
                                             <Col md={1}>

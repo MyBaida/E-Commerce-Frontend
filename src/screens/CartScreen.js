@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect , useReducer} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
@@ -7,7 +7,7 @@ import  Message  from '../Components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 import { useNavigate } from 'react-router-dom'
 
-const CartScreen = () => {
+const CartScreen = (location) => {
   const { id, qty } = useParams()
   const navigate = useNavigate()
   
@@ -15,11 +15,11 @@ const CartScreen = () => {
 
   const dispatch = useDispatch()
 
-  const cart = useSelector((state) => state.cart)
-  const { cartItems } = cart
+  const ship = useSelector((state) => state.ship)
+  const { cartItems } = ship
 
 
-  
+  const [, forceUpdate] = useReducer(x => x + 1, 0)
 
   useEffect(() => {
     const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : []
@@ -33,7 +33,7 @@ const CartScreen = () => {
 
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems))
-    
+    forceUpdate()
   }, [cartItems] );
   
 
@@ -54,7 +54,7 @@ dispatch(removeFromCart(id))
       <Row>
         <Col md={8}>
           <h1>Shopping Cart</h1>
-          {cartItems.length < 1 ? (
+          {cartItems.length === 0 ? (
     <Message variant='info'>Your cart is empty <Link to ='/'> Go back</Link></Message>
           ) : (
             <ListGroup variant="flush">
