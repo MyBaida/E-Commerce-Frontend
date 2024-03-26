@@ -34,7 +34,7 @@ useEffect(() => {
     if (success) {
         navigate(`/order/${order._id}`);
     }
-}, [success, order, navigate]);
+}, [ success, order, navigate]);
 
 
 

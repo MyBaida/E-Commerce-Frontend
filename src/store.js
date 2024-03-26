@@ -8,7 +8,7 @@ import { cartReducer } from './reducers/cartReducers'
 import {thunk} from 'redux-thunk';
 import { loadState, saveState } from './localStorage'
 import {userLoginReducer, userRegisterReducer, userListReducer, userDeleteReducer, userDetailsReducer, userUpdateProfileReducer} from '../src/reducers/userReducers';
-import { orderCreateReducer, orderDetailsReducer } from './reducers/orderReducers'
+import { orderCreateReducer, orderDetailsReducer, orderPayReducer, orderListMyReducer } from './reducers/orderReducers'
 
 
 const persistedState = loadState()
@@ -31,7 +31,9 @@ const store = configureStore({
         productDelete: productDeleteReducer,
         productCreate: productCreateReducer,
         orderCreate:orderCreateReducer,
-        orderDetails:orderDetailsReducer
+        orderDetails:orderDetailsReducer,
+        orderPay:orderPayReducer,
+        orderListMy:orderListMyReducer,
 
     },
         
