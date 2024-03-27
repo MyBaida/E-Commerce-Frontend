@@ -34,7 +34,7 @@ useEffect(() => {
     if (success) {
         navigate(`/order/${order._id}`);
     }
-}, [success, order, navigate]);
+}, [ success, order, navigate]);
 
 
 
@@ -54,23 +54,37 @@ const placeOrder = () => {
 console.log('Received order object:', order)
   return (
     <div>
-        <CheckoutSteps step1 step2 step3 step4/>
+        <h1>Order: {order._id}</h1>
         <Row>
             <Col md={8}>
                 <ListGroup variant='flush'>
-                    <ListGroup.Item>
-                        <h2>Shipping</h2>
+                <ListGroup.Item>
+    <h2>Shipping</h2>
+    {order.user && (
+        <>
+            <p><strong>Name: </strong>{order.user.name}</p>
+            <p><strong>Email: </strong><a href={`mailto:${order.user.email}`}>{order.user.email}</a></p>
+            {/* Render other properties of order.user similarly */}
+        </>
+    )}
+    <p>
+        <strong>Shipping: </strong>
+        {ship.shippingAddress.address}, {ship.shippingAddress.city}
+        {'  '}
+        {ship.shippingAddress.postalCode}
+        {'  '}
+        {ship.shippingAddress.country}
+    </p>
+    {order.isDelivered ? (
+                            <Message variant='success'> Delivered on {order.deliveredAt}</Message>
+                        ) : (
+                            <Message variant='warning'> Not Delivered </Message>
+                        )
+                        
+                    }
 
-                        <p>
-                            <strong>Shipping: </strong>
-                            {ship.shippingAddress.address}, {ship.shippingAddress.city}
-                            {'  '}
-                            {ship.shippingAddress.postalCode}
-                            {'  '}
-                            {ship.shippingAddress.country}
-                        </p>
-                
-                    </ListGroup.Item>
+</ListGroup.Item>
+
 
                     <ListGroup.Item>
                         <h2>Payment Method</h2>
@@ -80,6 +94,14 @@ console.log('Received order object:', order)
                             {ship.paymentMethod}
                             
                         </p>
+
+                        {order.isPaid ? (
+                            <Message variant='success'> Paid on {order.paidAt}</Message>
+                        ) : (
+                            <Message variant='warning'> Not Paid </Message>
+                        )
+                        
+                    }
                 
                     </ListGroup.Item>
 
@@ -155,16 +177,7 @@ console.log('Received order object:', order)
                         </ListGroup.Item>
 
 
-                        <ListGroup.Item>
-                            <Button
-                                type='button'
-                                className='btn-block'
-                                disabled={cart.cartItems === 0}
-                                onClick={placeOrder}
-                            >
-                                Place Order
-                            </Button>
-                        </ListGroup.Item>
+                        
 
 
                         </ListGroup>

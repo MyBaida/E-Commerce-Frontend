@@ -1,5 +1,5 @@
 import React , {useState, useEffect}from 'react'
-import products from '../products'
+
 import {Row, Col} from 'react-bootstrap'
 import Product from '../Components/Product'
 import Loader from '../Components/Loader'
@@ -9,10 +9,8 @@ import { listProducts } from '../actions/productActions'
 
 
 const HomeScreen = () => {
-    
     const dispatch =useDispatch()
     const productList = useSelector(state => state.productList)
-    // const {error, loading, products} = productList
     const {error, loading, products} = productList
 
   useEffect(() => {
@@ -27,19 +25,25 @@ const HomeScreen = () => {
   return (
     <div>
         <h1>Latest Products</h1>
+        {console.log(products)}\
         {loading ? <Loader/> 
-          : error ? <Message variant='danger'>{error}</Message> 
+          : error ? <h2>{error}</h2> 
             : 
-              <div>
-                <Row>
-                  {products.map((product) => (
-                     <Col key={product._id} sm={12} md={6} lg={4} xl={3} >
-                       <Product product={product}/>
-                      </Col>
-                  ))}
-                </Row>
+            <Row>
+            {Array.isArray(products) ? (
+              products.map((product) => (
+               <Col key={product._id} sm={12} md={6} lg={4} xl={3} >
+                 <Product product={product}/>
+                </Col>
+              ))
+            ) : (
+              products?.products?.map((product) => (
+               <Col key={product._id} sm={12} md={6} lg={4} xl={3} >
+                 <Product product={product}/>
+                </Col>
+              )))}
+        </Row>
     
-              </div>
                   }
 
     </div>              

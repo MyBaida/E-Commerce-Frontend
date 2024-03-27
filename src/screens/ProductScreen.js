@@ -29,10 +29,12 @@ const ProductScreen = () => {
     dispatch(listProductDetails(id));
   }, [dispatch, id]);
 
-  const addToCartHandler = () => {
-    dispatch(addToCart(id, qty))
-    navigate(`/cart/${id}?qty=${qty}`)
-  }
+  const addToCartHandler = async () => {
+    await dispatch(addToCart(id, qty));
+    navigate(`/cart/${id}?qty=${qty}`);
+  };
+  
+  
 
   return (
     <div>
@@ -84,14 +86,15 @@ const ProductScreen = () => {
                   <Row>
                     <Col>Qty</Col>
                     <Col xs='auto' className='my-1'>
-                    <Form.Select value={qty} onChange={(e) => setQty(e.target.value)}>
-                      <option>Quantity</option>
-                         {[...Array(product.countInStock).keys()].map((x) => (
-                             <option key={x + 1} value={x + 1}>
-                                {x + 1}
-                            </option>
-                             ))}
+                    <Form.Select value={qty} onChange={(e) => setQty(parseInt(e.target.value))}>
+  <option>Quantity</option>
+  {[...Array(product.countInStock).keys()].map((x) => (
+    <option key={x + 1} value={x + 1}>
+      {x + 1}
+    </option>
+  ))}
 </Form.Select>
+
                     </Col>
                   </Row>
                 </ListGroup.Item>
