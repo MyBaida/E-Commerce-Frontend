@@ -39,7 +39,7 @@ const PaymentScreen = () => {
 
             <Form onSubmit={submitHandler}>
                 <Form.Group>
-                    <Form as='Legend'>Payment Method</Form>
+                    <Form as='legend'>Payment Method</Form>
                     <Form.Control as="select" value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
                         <option value="PayPal">PayPal</option>
                         <option value="Credit Card">Credit Card</option>

@@ -11,13 +11,13 @@ import { listProducts } from '../actions/productActions'
 
 
 const HomeScreen = () => {
-    
     const dispatch =useDispatch()
     const location = useLocation();
     const navigate = useNavigate()
 
     const productList = useSelector(state => state.productList)
     const {error, loading, products, page, pages} = productList
+
 
     let keyword = location.search
 
@@ -37,9 +37,11 @@ const HomeScreen = () => {
     <div>
         {!keyword && <ProductCarousel/>}
         <h1>Latest Products</h1>
+        {console.log(products)}\
         {loading ? <Loader/> 
-          : error ? <Message variant='danger'>{error}</Message> 
+          : error ? <h2>{error}</h2> 
             : 
+
               <div>
                 <Row>
                   {products.map((product) => (
@@ -51,6 +53,8 @@ const HomeScreen = () => {
                 <Paginate page={page} pages={pages} keyword={keyword} />
               </div>
         }
+
+            
 
     </div>              
       

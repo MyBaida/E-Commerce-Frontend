@@ -7,8 +7,10 @@ import { productListReducer , productDetailsReducer, productDeleteReducer, produ
 import { cartReducer } from './reducers/cartReducers'
 import {thunk} from 'redux-thunk';
 import { loadState, saveState } from './localStorage'
+
 import {userLoginReducer, userRegisterReducer, userListReducer, userDeleteReducer, userDetailsReducer, userUpdateProfileReducer, userUpdateReducer, userCreateReducer} from '../src/reducers/userReducers';
 import { categoryListReducer,categoryDetailsReducer, categoryProductsReducer, categoryDeleteReducer, categoryCreateReducer , categoryUpdateReducer} from './reducers/categoryReducers'
+
 
 
 
@@ -47,6 +49,12 @@ const store = configureStore({
         categoryCreate: categoryCreateReducer,
         categoryUpdate: categoryUpdateReducer,
         
+
+        
+        orderCreate:orderCreateReducer,
+        orderDetails:orderDetailsReducer,
+        orderPay:orderPayReducer,
+        orderListMy:orderListMyReducer,
 
     },
         

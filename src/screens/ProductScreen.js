@@ -47,10 +47,12 @@ const ProductScreen = () => {
     dispatch(listProductDetails(id));
   }, [dispatch, id, successProductReview]);
 
-  const addToCartHandler = () => {
-    dispatch(addToCart(id, qty))
-    navigate(`/cart/${id}?qty=${qty}`)
-  }
+  const addToCartHandler = async () => {
+    await dispatch(addToCart(id, qty));
+    navigate(`/cart/${id}?qty=${qty}`);
+  };
+  
+  
 
 
   const submitHandler = (e) => {
@@ -74,6 +76,7 @@ const ProductScreen = () => {
          : error 
          ? <Message variant='danger'>{error}</Message>
          :(
+
           <div>
             <Row>
               <Col md={6}>
@@ -155,6 +158,8 @@ const ProductScreen = () => {
                     <Rating value={review.rating} color='#f8e825' />
                     <p>{review.createdAt.substring(0, 10)}</p>
                     <p>{review.comment}</p>
+
+
                 </ListGroup.Item>
             ))}
 
