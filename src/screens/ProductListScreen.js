@@ -1,20 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
+import { useNavigate, useLocation } from 'react-router-dom'; // Import useNavigate
 import { Form, Button, Table, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Components/Loader';
 import Message from '../Components/Message';
+import Paginate from '../Components/Paginate';
 import { listProducts, deleteProduct,createProduct } from '../actions/productActions';
 import products from '../products';
 import {PRODUCT_CREATE_RESET} from '../constants/productConstants';
 
 function ProductListScreen() {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Use useNavigate to access navigation functions
+  const navigate = useNavigate()
+  const location = useLocation(); // Use useNavigate to access navigation functions
 
   const productList = useSelector(state => state.productList);
-  const { loading, error, products } = productList;
+  const { loading, error, products, pages, page} = productList;
 
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
@@ -25,7 +27,7 @@ function ProductListScreen() {
   const productCreate = useSelector(state => state.productCreate);
   const { loading: loadingCreate, error: errorCreate, success: successCreate, product: createdProduct  } = productCreate
 
-
+  let keyword = location.search
   useEffect(() => {
     dispatch({type:PRODUCT_CREATE_RESET} )
 
@@ -34,12 +36,12 @@ function ProductListScreen() {
     } 
 
     if (successCreate){
-      navigate(`/admin/product/${createProduct._id}/edit`);
+      navigate(`/admin/product/${createdProduct._id}/edit`);
     } else{
-      dispatch(listProducts())
+      dispatch(listProducts(keyword))
     }
    
-  }, [dispatch, navigate, userInfo, successDelete, successCreate, createProduct]);
+  }, [dispatch, navigate, userInfo, successDelete, successCreate, createdProduct, keyword]);
 
   const deleteHandler = (id) => {
 if(window.confirm('Confirm deletion of product?'))
@@ -81,6 +83,7 @@ if(window.confirm('Confirm deletion of product?'))
       ) : error ? (
         <Message variant='danger'>{error}</Message>
       ) : (
+        <div>
         <Table striped border hover responsive className='table-sm'>
           <thead>
             <tr>
@@ -98,7 +101,7 @@ if(window.confirm('Confirm deletion of product?'))
               <tr key={product._id}>
                 <td>{product._id}</td>
                 <td>{product.name}</td>
-                <td>${product.price}</td>
+                <td>GHC{product.price}</td>
                 <td>{product.category}</td>
                 <td>{product.brand}</td>
            
@@ -122,6 +125,8 @@ if(window.confirm('Confirm deletion of product?'))
             ))}
           </tbody>
         </Table>
+        <Paginate page={page} pages={pages} isAdmin={true} />
+        </div>
       )}
     </div>
   );

@@ -4,7 +4,7 @@ import { Navbar, Nav, Container, Row, NavDropdown } from 'react-bootstrap'
 import { LinkContainer} from 'react-router-bootstrap';
 import { logout } from '../actions/userActions'
 
-
+import SearchBox from './SearchBox'
 
 
 
@@ -31,7 +31,8 @@ const Header = () => {
         </LinkContainer>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
+          <SearchBox />
+          <Nav>
 
             <LinkContainer to='/cart'>
                   <Nav.Link ><i className='fas fa-shopping-cart'></i>Cart</Nav.Link>
@@ -67,9 +68,9 @@ const Header = () => {
                         <NavDropdown.Item>Orders</NavDropdown.Item>
                     </LinkContainer>
 
-                    {/* <LinkContainer to='/admin/categorylist'> 
+                    <LinkContainer to='/admin/categorylist'> 
                         <NavDropdown.Item>Categories</NavDropdown.Item>
-                    </LinkContainer> */}
+                    </LinkContainer>
                         
     
                   </NavDropdown>

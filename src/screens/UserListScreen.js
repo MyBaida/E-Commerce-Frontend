@@ -100,15 +100,15 @@
 import React, { useState, useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import { Form, Button, Table } from 'react-bootstrap';
+import { Form, Button, Table, Row, Col } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Components/Loader';
 import Message from '../Components/Message';
-import { listUsers,deleteUser } from '../actions/userActions';
+import { listUsers,deleteUser, createUser } from '../actions/userActions';
 
 function UserListScreen() {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); // Use useNavigate to access navigation functions
+  const navigate = useNavigate(); 
 
   const userList = useSelector(state => state.userList);
   const { loading, error, users } = userList;
@@ -116,9 +116,36 @@ function UserListScreen() {
   const userLogin = useSelector(state => state.userLogin);
   const { userInfo } = userLogin;
 
+  // const userCreate = useSelector(state => state.userCreate);
+  // const { loading: loadingCreate, error: errorCreate, success: successCreate, user: createdUser } = userCreate
   
   const userDelete = useSelector(state => state.userDelete);
   const { success: successDelete } = userDelete;
+
+  // useEffect(() => {
+  //   dispatch({type:USER_CREATE_RESET} )
+
+  //   if (!userInfo.isAdmin) {
+  //    navigate('/login');
+  //   } 
+
+  //   if (successCreate){
+  //     navigate(`/admin/user/${createUser._id}/edit`);
+  //   } else{
+  //     dispatch(listUsers())
+  //   }
+   
+  // }, [dispatch, navigate, userInfo, successDelete, successCreate, createUser]);
+
+//   useEffect(() => {
+//     if (userInfo && userInfo.isAdmin) {
+//         dispatch(listUsers())
+//     } else {
+//         navigate('/login');
+//     }
+
+// }, [dispatch, navigate, successDelete, userInfo])
+
 
   useEffect(() => {
     if (userInfo && userInfo.isAdmin) {
@@ -128,16 +155,38 @@ function UserListScreen() {
     }
   }, [dispatch, navigate, userInfo, successDelete]);
 
+
   const deleteHandler = (id) => {
-if(window.confirm('Are you sure you want to delete user?'))
-    {
-        dispatch(deleteUser(id))
-    }   
-  };
+    if(window.confirm('Are you sure you want to delete user?'))
+        {
+            dispatch(deleteUser(id))
+        }   
+      };
+
+
+  const createUserHandler = () =>{
+    window.location.href = '/admin/user/create';
+    // dispatch(createUser())
+    // console.log('hi')
+  }
+
+
 
   return (
     <div>
-      <h1>Users</h1>
+      {/* <h1>Users</h1> */}
+      <Row className='aligh-items-center'>
+        <Col>
+            <Button className='my-3' onClick={createUserHandler}>
+                <i className='fas fa-plus' style={{'text-Decoration': 'underline'}}> </i>
+                Create User
+            </Button>
+        </Col>
+
+        <Col className='text-right'>
+            <h1> Users</h1>
+        </Col>
+      </Row>
       {loading ? (
         <Loader />
       ) : error ? (
