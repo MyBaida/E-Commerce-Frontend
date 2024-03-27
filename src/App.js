@@ -17,6 +17,10 @@ import UserListScreen from "./screens/UserListScreen";
 import UserEditScreen from "./screens/UserEditScreen";
 import ProfileScreen from "../src/screens/ProfileScreen";
 import ProductListScreen from "../src/screens/ProductListScreen";
+import ProductEditScreen from "../src/screens/ProductEditScreen";
+import CategoryListScreen from "../src/screens/CategoryListScreen";
+import CategoryEditScreen from "../src/screens/CategoryEditScreen";
+import AdminUserCreateScreen from "../src/screens/AdminUserCreateScreen";
 
 function App() {
   return (
@@ -38,7 +42,11 @@ function App() {
 
           <Route path='/admin/userlist' element={<UserListScreen/>} />
           <Route path='/admin/productlist' element={<ProductListScreen/>} />
+          <Route path='/admin/product/:id/edit' element={<ProductEditScreen/>} />
           <Route path='/admin/user/:id/edit' element={<UserEditScreen/>} />
+          <Route path='/admin/user/create' element={<AdminUserCreateScreen/>} />
+          <Route path='/admin/categorylist' element={<CategoryListScreen/>} />
+          <Route path='/admin/category/:id/edit' element={<CategoryEditScreen/>} />
         </Routes>
         </Container>
       </main>
