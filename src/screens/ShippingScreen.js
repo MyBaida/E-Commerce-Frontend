@@ -20,10 +20,18 @@ const ShippingScreen = () => {
     const [postalCode, setPostalCode] = useState(shippingAddress.postalCode)
     const [country, setCountry] = useState(shippingAddress.country)
 
+
+
     const submitHandler =(e) =>{
         e.preventDefault()
         dispatch(saveShippingAddress({address, city, postalCode, country}))
+        
+        // setAddress('');
+        // setCity('');
+        // setPostalCode('');
+        // setCountry('');
         navigate('/payment')
+        console.log(address)
     }
 
   return (

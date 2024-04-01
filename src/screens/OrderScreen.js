@@ -192,7 +192,7 @@ const OrderScreen = () => {
                             <ListGroup.Item>
                                 <Row>
                                     <Col>Total:</Col>
-                                    <Col>GHS {(order.totalPrice).toFixed(2)}</Col>
+                                    <Col>GHS {(order.totalPrice)}</Col>
                                 </Row>    
                             </ListGroup.Item>
 

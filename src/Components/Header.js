@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Navbar, Nav, Container, NavDropdown } from 'react-bootstrap'
 import { LinkContainer} from 'react-router-bootstrap';
 import { logout } from '../actions/userActions'
-import { removeFromCart } from '../actions/cartActions'
+import { removeFromCart, saveShippingAddress } from '../actions/cartActions'
 import SearchBox from './SearchBox'
 
 
@@ -22,6 +22,7 @@ const Header = () => {
         cart.cartItems.forEach(item => {
           dispatch(removeFromCart(item.product));
         });
+        dispatch(saveShippingAddress({}))
     }
 
     return (

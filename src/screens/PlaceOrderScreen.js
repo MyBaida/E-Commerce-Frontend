@@ -2,11 +2,12 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector,  } from 'react-redux'
 import {  useNavigate } from 'react-router-dom'
 import { Row, Col, ListGroup, Image, Button, Card } from 'react-bootstrap'
-import { removeFromCart } from '../actions/cartActions'
+import { removeFromCart, saveShippingAddress } from '../actions/cartActions'
 import CheckoutSteps from '../Components/CheckoutSteps'
 import {Link}  from 'react-router-dom'
 import { createOrder } from '../actions/orderActions'
 import Message from '../Components/Message'
+
 
 
 const PlaceOrderScreen = () => {
@@ -52,6 +53,7 @@ const PlaceOrderScreen = () => {
         cart.cartItems.forEach(item => {
             dispatch(removeFromCart(item.product));
         });
+        dispatch(saveShippingAddress({}))
     };
 
     return (
