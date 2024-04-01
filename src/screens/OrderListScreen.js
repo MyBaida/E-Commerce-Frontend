@@ -67,7 +67,7 @@ function OrderListScreen() {
                                         </td>
 
                                         <td>{order.isDelivered ? (
-                                            order.deliveredAt
+                                            order.deliveredAt.substring(0, 10)
                                         ) : (
                                                 <i className='fas fa-check' style={{ color: 'red' }}></i>
                                             )}

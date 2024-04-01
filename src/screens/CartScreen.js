@@ -1,18 +1,22 @@
 import React, { useEffect , useReducer} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useParams, useLocation } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import  Message  from '../Components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 import { useNavigate } from 'react-router-dom'
 
-const CartScreen = (location) => {
+const CartScreen = () => {
 
-    const { id, qty } = useParams()
+    // const { id, qty } = useParams()
+    const { id } = useParams()
     const navigate = useNavigate()
+    const location = useLocation()
 
     const dispatch = useDispatch()
+
+    const qty = location.search ? Number(location.search.split('=')[1]) : 1
 
     const ship = useSelector((state) => state.ship)
     const { cartItems } = ship
@@ -40,6 +44,7 @@ const CartScreen = (location) => {
       if (id) {
           dispatch(addToCart(id, qty))
       }
+      console.log('qty:', qty)
   }, [dispatch, id, qty])
     
 
