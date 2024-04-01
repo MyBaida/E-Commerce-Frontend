@@ -1,5 +1,6 @@
-
+// import { createStore, combineReducers, applyMiddleware } from 'redux'
 import {composeWithDevTools} from '@redux-devtools/extension'
+// import thunk from 'redux-thunk'
 
 import {configureStore} from '@reduxjs/toolkit'
 import productReducers from './reducers/productReducers'
@@ -10,6 +11,8 @@ import { loadState, saveState } from './localStorage'
 
 import {userLoginReducer, userRegisterReducer, userListReducer, userDeleteReducer, userDetailsReducer, userUpdateProfileReducer, userUpdateReducer, userCreateReducer} from '../src/reducers/userReducers';
 import { categoryListReducer,categoryDetailsReducer, categoryProductsReducer, categoryDeleteReducer, categoryCreateReducer , categoryUpdateReducer} from './reducers/categoryReducers'
+
+import { orderListMyReducer , orderDetailsReducer, orderCreateReducer, orderPayReducer, orderListReducer, orderDeliverReducer, } from './reducers/orderReducers'
 
 
 
@@ -44,7 +47,7 @@ const store = configureStore({
         
         categoryList: categoryListReducer,
         categoryDetails: categoryDetailsReducer,
-        categoryProduct: categoryProductsReducer,
+        categoryProducts: categoryProductsReducer,
         categoryDelete: categoryDeleteReducer,
         categoryCreate: categoryCreateReducer,
         categoryUpdate: categoryUpdateReducer,
@@ -55,7 +58,8 @@ const store = configureStore({
         orderDetails:orderDetailsReducer,
         orderPay:orderPayReducer,
         orderListMy:orderListMyReducer,
-
+        orderList: orderListReducer,
+        orderDeliver: orderDeliverReducer,
     },
         
     preloadedState: persistedState,

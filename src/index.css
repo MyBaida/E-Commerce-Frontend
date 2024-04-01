@@ -53,15 +53,13 @@ margin: 0 auto;
 }
 }
 
-/* .paginate-item:hover {
-  background-color: #e9ecef;
-} */
+.btn-circle{
+  border-radius: 15px;
+  /* padding: 6px 0px; */
+  margin-right: 10px;
+  /* margin-bottom: 100px; */
+}
 
-
-/* .bg-purple{
-  background-color: rgb(31, 6, 45);
-} */
-
-/* .justify-content-end {
-  justify-content: flex-end !important;
+/* .btn-circle:hover{
+  background-color: rgb(186, 52, 52);
 } */

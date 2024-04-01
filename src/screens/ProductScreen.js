@@ -47,12 +47,26 @@ const ProductScreen = () => {
     dispatch(listProductDetails(id));
   }, [dispatch, id, successProductReview]);
 
-  const addToCartHandler = async () => {
-    await dispatch(addToCart(id, qty));
+  // const addToCartHandler = async () => {
+  //   await dispatch(addToCart(id, qty));
+  //   navigate(`/cart/${id}?qty=${qty}`);
+  // };
+
+  const addToCartHandler =  () => {
+    // dispatch(addToCart(id, qty));
     navigate(`/cart/${id}?qty=${qty}`);
+    console.log(id)
   };
   
   
+//   const addToCartHandler = () => {
+//     dispatch(addToCart(id, qty)).then(() => {
+//         navigate(`/cart/${id}?qty=${qty}`);
+//     }).catch((error) => {
+//         // Handle any errors that occur during dispatch or navigation
+//         console.error('An error occurred:', error);
+//     });
+// };
 
 
   const submitHandler = (e) => {
@@ -113,21 +127,44 @@ const ProductScreen = () => {
                   </ListGroup.Item>
 
                   {product.countInStock > 0 &&(
-                    <ListGroup.Item>
-                      <Row>
-                        <Col>Qty</Col>
-                        <Col xs='auto' className='my-1'>
-                        <Form.Select value={qty} onChange={(e) => setQty(e.target.value)}>
-                          <option>Quantity</option>
-                            {[...Array(product.countInStock).keys()].map((x) => (
-                                <option key={x + 1} value={x + 1}>
-                                    {x + 1}
-                                </option>
-                                ))}
-    </Form.Select>
-                        </Col>
-                      </Row>
-                    </ListGroup.Item>
+
+<ListGroup.Item>
+<Row>
+    <Col>Qty</Col>
+    <Col xs='auto' className='my-1'>
+        <Form.Control
+            as="select"
+            value={qty}
+            onChange={(e) => setQty(e.target.value)}
+        >
+            {
+
+                [...Array(product.countInStock).keys()].map((x) => (
+                    <option key={x + 1} value={x + 1}>
+                        {x + 1}
+                    </option>
+                ))
+            }
+
+        </Form.Control>
+    </Col>
+</Row>
+</ListGroup.Item>
+    //                 <ListGroup.Item>
+    //                   <Row>
+    //                     <Col>Qty</Col>
+    //                     <Col xs='auto' className='my-1'>
+    //                     <Form.Select value={qty} onChange={(e) => setQty(e.target.value)}>
+    //                       <option>Quantity</option>
+    //                         {[...Array(product.countInStock).keys()].map((x) => (
+    //                             <option key={x + 1} value={x + 1}>
+    //                                 {x + 1}
+    //                             </option>
+    //                             ))}
+    // </Form.Select>
+    //                     </Col>
+    //                   </Row>
+    //                 </ListGroup.Item>
                   )}
 
                   <ListGroup.Item>
@@ -148,7 +185,7 @@ const ProductScreen = () => {
 
     <Row>
     <Col md={6}>
-        <h4>Reviews</h4>
+        <h4 className='my-4' >Reviews</h4>
         {product.reviews.length === 0 && <Message variant='info'>No Reviews</Message>}
 
         <ListGroup variant='flush'>
@@ -193,6 +230,7 @@ const ProductScreen = () => {
                             <Form.Control
                                 as='textarea'
                                 row='5'
+                                placeholder='Comment Here'
                                 value={comment}
                                 onChange={(e) => setComment(e.target.value)}
                             ></Form.Control>
