@@ -7,13 +7,12 @@ import Loader from '../Components/Loader';
 import Message from '../Components/Message';
 import Paginate from '../Components/Paginate';
 import { listProducts, deleteProduct,createProduct } from '../actions/productActions';
-import products from '../products';
 import {PRODUCT_CREATE_RESET} from '../constants/productConstants';
 
 function ProductListScreen() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
-  const location = useLocation(); // Use useNavigate to access navigation functions
+  const location = useLocation(); 
 
   const productList = useSelector(state => state.productList);
   const { loading, error, products, pages, page} = productList;

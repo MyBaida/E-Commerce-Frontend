@@ -49,9 +49,7 @@ export const listCategories = () => async (dispatch) => {
   }
 
 
-
-
-  export const listCategoryDetails = (id) => async (dispatch) => {
+export const listCategoryDetails = (id) => async (dispatch) => {
     try{
         dispatch({type: CATEGORY_DETAILS_REQUEST})
         const { data } = await axios.get(`/api/categories/${id}`);
@@ -74,11 +72,11 @@ export const listCategories = () => async (dispatch) => {
 }
 
 
-export const listCategoryProducts = (categoryName) => async (dispatch) => {
+export const listCategoryProducts = (id) => async (dispatch) => {
     try {
         dispatch({ type: CATEGORY_PRODUCTS_REQUEST })
 
-        const { data } = await axios.get(`/api/categories/${categoryName}/`)
+        const { data } = await axios.get(`/api/categories/${id}/products/`)
 
         dispatch({
             type: CATEGORY_PRODUCTS_SUCCESS,

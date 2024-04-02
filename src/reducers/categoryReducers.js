@@ -84,13 +84,13 @@ export const categoryDetailsReducer = (state = { category: {} }, action) => {
 //     }
 // }
 
-export const categoryProductsReducer = (state = { products: [], loading: false, error: null }, action) => {
+export const categoryProductsReducer = (state = { catproducts: [], loading: false, error: null }, action) => {
     switch (action.type) {
         case CATEGORY_PRODUCTS_REQUEST:
             return { ...state, loading: true, error: null }
 
         case CATEGORY_PRODUCTS_SUCCESS:
-            return { ...state, loading: false, products: action.payload }
+            return { ...state, loading: false, catproducts: action.payload }
 
         case CATEGORY_PRODUCTS_FAIL:
             return { ...state, loading: false, error: action.payload }

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'; 
+import axios from 'axios'
 import { Link, useParams, useNavigate } from 'react-router-dom'; 
 import { Form, Button } from 'react-bootstrap'; 
 import { useDispatch, useSelector } from 'react-redux'; 
@@ -7,7 +8,7 @@ import Message from '../Components/Message';
 import FormContainer from '../Components/FormContainer'; 
 import { listProductDetails, updateProduct } from '../actions/productActions'; 
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'; 
- 
+  
 function ProductEditScreen() { 
     const { id: productId } = useParams(); 
     const navigate = useNavigate(); 
@@ -19,7 +20,8 @@ function ProductEditScreen() {
     const [category, setCategory] = useState(''); 
     const [countInStock, setCountInStock] = useState(''); 
     const [description, setDescription] = useState(''); 
- 
+    const [uploading, setUploading] = useState(false)
+
     const dispatch = useDispatch(); 
  
     const productDetails = useSelector(state => state.productDetails); 
@@ -35,6 +37,7 @@ function ProductEditScreen() {
     const { error: errorUpdate, loading: loadingUpdate, success: successUpdate } = productUpdate; 
  
     useEffect(() => { 
+        // console.log(categories)
         if (successUpdate) { 
             dispatch({ 
                 type: PRODUCT_UPDATE_RESET, 
@@ -69,6 +72,36 @@ function ProductEditScreen() {
         })); 
         navigate('/admin/productlist'); 
     }; 
+
+
+    const uploadFileHandler = async (e) => {
+        // console.log('File is Uploaded')
+        const file = e.target.files[0]
+        const formData = new FormData()
+
+        formData.append('image', file)
+        formData.append('product_id', productId)
+
+        setUploading(true)
+
+        try {
+            const config = {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+
+            const { data } = await axios.post('/api/products/upload/', formData, config)
+
+
+            setImage(data)
+            setUploading(false)
+
+        } catch (error) {
+            setUploading(false)
+        }
+    }
+
  
     return ( 
         <div> 
@@ -78,7 +111,7 @@ function ProductEditScreen() {
  
             <FormContainer> 
                 <h1>Edit Product</h1> 
-                {loadingUpdate && <Loader />} 
+                {/* {loadingUpdate && <Loader />}  */}
                 {errorUpdate && <Message variant='danger'>{errorUpdate}</Message>} 
  
                 {productDetailsLoading || categoriesLoading ? ( 
@@ -107,14 +140,31 @@ function ProductEditScreen() {
                             /> 
                         </Form.Group> 
  
-                        <Form.Group controlId='image'> 
-                            <Form.Label>Image</Form.Label> 
-                            <Form.Control 
-                                type='text' 
-                                placeholder='Enter image path' 
-                                value={image} 
-                                onChange={(e) => setImage(e.target.value)}/> 
-                                </Form.Group> 
+                        <Form.Group controlId='formFile'>
+                                <Form.Label>Image</Form.Label>
+                                <Form.Control
+
+                                    type='text'
+                                    placeholder='Enter image'
+                                    value={image}
+                                    readOnly
+                                    onChange={(e) => setImage(e.target.value)}
+                                >
+                                </Form.Control>
+                               
+                                <Form.Control
+                                    type='file'
+                                    id='image-file'
+                                    
+                                    custom
+                                    onChange={uploadFileHandler}
+                                >
+
+                                </Form.Control>
+                                
+                                {uploading && <Loader />}
+
+                            </Form.Group>
          
                             <Form.Group controlId='brand'> 
                                 <Form.Label>Brand</Form.Label> 
@@ -126,18 +176,30 @@ function ProductEditScreen() {
                                 /> 
                             </Form.Group> 
          
-                            <Form.Group controlId='category'> 
-                                <Form.Label>Category</Form.Label> 
-                                <Form.Control 
-                                    as='select' 
+                            
+
+                            <Form.Group controlId='category'>
+                                <Form.Label>Category</Form.Label>
+                                {/* <Form.Control
+                                    type='text'
+                                    value={category}
+                                    placeholder='None'
+                                    readOnly
+                                >
+
+                                </Form.Control> */}
+                                <Form.Control
+                                    as='select'
                                     value={category} 
-                                    onChange={(e) => setCategory(e.target.value)} 
-                                > 
-                                    {categories.map(cat => ( 
-                                        <option key={cat._id} value={cat._id}>{cat.name}</option> 
-                                    ))} 
-                                </Form.Control> 
-                            </Form.Group> 
+                                    onChange={(e) => setCategory(e.target.value)}
+                                >
+                                    <option value="">Select Category</option>
+                                    {categories.map(cat => (
+                                        <option key={cat.name} value={cat.name}>{cat.name}</option>
+                                    ))}
+                                </Form.Control>
+                            </Form.Group>
+
          
                             <Form.Group controlId='countInStock'> 
                                 <Form.Label>Count In Stock</Form.Label> 
@@ -168,5 +230,3 @@ function ProductEditScreen() {
     } 
          
 export default ProductEditScreen;
-
-

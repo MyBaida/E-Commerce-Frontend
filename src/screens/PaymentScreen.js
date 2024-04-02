@@ -1,13 +1,12 @@
 import React from 'react'
-import  { useState, useEffect , useReducer} from 'react'
+import  { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams, useNavigate } from 'react-router-dom'
-import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import { Col, Form, Button } from 'react-bootstrap'
 
 import {  savePaymentMethod } from '../actions/cartActions'
 import CheckoutSteps from '../Components/CheckoutSteps'
 import FormContainer from '../Components/FormContainer'
-
 
 
 const PaymentScreen = () => {
@@ -43,6 +42,7 @@ const PaymentScreen = () => {
                     <Form.Control as="select" value={paymentMethod} onChange={(e) => setPaymentMethod(e.target.value)}>
                         <option value="PayPal">PayPal</option>
                         <option value="Credit Card">Credit Card</option>
+                        <option value="T-Cash">T-Cash</option>
                     </Form.Control>
                     <Col>
                     {/* <Form.Check
