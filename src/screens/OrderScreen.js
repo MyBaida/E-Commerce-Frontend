@@ -84,7 +84,7 @@ const OrderScreen = () => {
 
 
         <div>
-            <h1>Order: {order._id}</h1>
+            <h1>Order: DS{order._id}</h1>
             <Row>
                 <Col md={8}>
                     <ListGroup variant='flush'>

@@ -5,6 +5,7 @@ import { Row, Col, Image, ListGroup, Button , Card, Form} from 'react-bootstrap'
 import Rating from '../Components/Rating';
 import { useDispatch, useSelector } from 'react-redux';
 import { listProductDetails, createProductReview } from '../actions/productActions';
+import { listMyOrders } from '../actions/orderActions'
 import Message from '../Components/Message';
 import Loader from '../Components/Loader';
 import { addToCart } from '../actions/cartActions'
@@ -24,10 +25,15 @@ const ProductScreen = () => {
   const productDetails = useSelector((state) => state.productDetails);
   const { loading, error, product } = productDetails;
 
+  const orderListMy = useSelector(state => state.orderListMy);
+  const { loading: loadingOrders, error:errorOrders, orders} = orderListMy;
+
   const userLogin = useSelector(state => state.userLogin)
   const { userInfo } = userLogin
 
   const { id } = useParams();
+
+  const [errorMessage, setErrorMessage] = useState('');
   
   const productReviewCreate = useSelector(state => state.productReviewCreate)
   const {
@@ -42,10 +48,18 @@ const ProductScreen = () => {
       setRating(0)
       setComment('')
       dispatch({ type: PRODUCT_CREATE_REVIEW_RESET })
+      
     }
 
+    // dispatch(listMyOrders())
     dispatch(listProductDetails(id));
-  }, [dispatch, id, successProductReview]);
+
+    if (errorProductReview) {
+      setErrorMessage(errorProductReview);
+    }
+  }, [dispatch, id, successProductReview, errorProductReview]);
+
+  // console.log(orders)
 
   // const addToCartHandler = async () => {
   //   await dispatch(addToCart(id, qty));
@@ -67,6 +81,7 @@ const ProductScreen = () => {
 //     });
 // };
 
+  
 
   const submitHandler = (e) => {
     e.preventDefault()
@@ -77,6 +92,16 @@ const ProductScreen = () => {
     }
     ))
   }
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setErrorMessage('');
+    }, 3000); // reset error message after 3 seconds
+  
+    return () => {
+      clearTimeout(timer); // clear timeout on component unmount
+    };
+  }, [errorMessage]);
 
   return (
     <div>
@@ -204,9 +229,10 @@ const ProductScreen = () => {
 
                 {loadingProductReview && <Loader />}
                 {successProductReview && <Message variant='success'>Review Submitted</Message>}
-                {errorProductReview && <Message variant='danger'>{errorProductReview}</Message>}
+                {/* {errorProductReview && <Message variant='danger'>{errorProductReview}</Message>} */}
+                {/* {errorMessage && <Message variant='danger'>{errorMessage}</Message>} */}
 
-                {userInfo ? (
+                {/* {userInfo ? (
                     <Form onSubmit={submitHandler}>
                         <Form.Group controlId='rating'>
                             <Form.Label>Rating</Form.Label>
@@ -247,7 +273,59 @@ const ProductScreen = () => {
                     </Form>
                 ) : (
                         <Message variant='info'>Please <Link to='/login'>login</Link> to write a review</Message>
-                    )}
+                    )} */}
+
+
+{userInfo ? (
+  <>
+    {orders.some(order => order.orderItems.some(item => item.product === parseInt(id))) ? (
+      
+      <Form onSubmit={submitHandler}>
+        <Form.Group controlId='rating'>
+          <Form.Label>Rating</Form.Label>
+          <Form.Control
+            as='select'
+            value={rating}
+            onChange={(e) => setRating(e.target.value)}
+          >
+            <option value=''>Select...</option>
+            <option value='1'>1 - Poor</option>
+            <option value='2'>2 - Fair</option>
+            <option value='3'>3 - Good</option>
+            <option value='4'>4 - Very Good</option>
+            <option value='5'>5 - Excellent</option>
+          </Form.Control>
+        </Form.Group>
+
+        <Form.Group controlId='comment'>
+          <Form.Label>Review</Form.Label>
+          <Form.Control
+            as='textarea'
+            row='5'
+            value={comment}
+            onChange={(e) => setComment(e.target.value)}
+          ></Form.Control>
+        </Form.Group>
+
+        <Button
+          disabled={loadingProductReview}
+          type='submit'
+          variant='primary'
+        >
+          Submit
+        </Button>
+      </Form>
+    ) : (
+      <Message variant='info'>
+        Review product after purchase
+      </Message>
+    )}
+  </>
+) : (
+  <Message variant='info'>
+    Please <Link to='/login'>login</Link> to write a review
+  </Message>
+)}
             </ListGroup.Item>
         </ListGroup>
     </Col>
