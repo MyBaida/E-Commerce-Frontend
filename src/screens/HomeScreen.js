@@ -9,6 +9,7 @@ import ProductCarousel from '../Components/ProductCarousel';
 import CategoryCarousel from '../Components/CategoryCarousel';
 import {useDispatch, useSelector} from 'react-redux'
 import { listProducts } from '../actions/productActions'
+import { listMyOrders } from '../actions/orderActions'
 
 
 const HomeScreen = () => {
@@ -22,6 +23,7 @@ const HomeScreen = () => {
     let keyword = location.search
 
     useEffect(() => {
+      dispatch(listMyOrders())
         dispatch(listProducts(keyword))
         
     }, [dispatch, keyword])
