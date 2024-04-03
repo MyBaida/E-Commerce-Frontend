@@ -198,6 +198,7 @@ function UserListScreen() {
               <th>ID</th>
               <th>NAME</th>
               <th>EMAIL</th>
+              <th>User</th>
               <th>ADMIN</th>
               <th></th>
             </tr>
@@ -209,11 +210,16 @@ function UserListScreen() {
                 <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>{user.email}</td>
+                <td>{
+                   
+                      <i className='fas fa-check' style={{ color: 'green' }}></i>
+                   
+                }</td>
                 <td>
                   {user.isAdmin ? (
                     <i className='fas fa-check' style={{ color: 'green' }}></i>
                   ) : (
-                    <i className='fas fa-check' style={{ color: 'red' }}></i>
+                    <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
 
