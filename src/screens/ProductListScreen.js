@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { LinkContainer } from 'react-router-bootstrap';
 import { useNavigate, useLocation } from 'react-router-dom'; // Import useNavigate
-import { Form, Button, Table, Row, Col } from 'react-bootstrap';
+import { Form, Button, Table, Row, Col, Image } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from '../Components/Loader';
 import Message from '../Components/Message';
@@ -103,6 +103,9 @@ if(window.confirm('Confirm deletion of product?'))
                 <td>GHC{product.price}</td>
                 <td>{product.category}</td>
                 <td>{product.brand}</td>
+                <td><Image className='admin' src={product.image} alt={product.name} fluid /></td>
+                
+                
            
 
                 <td>

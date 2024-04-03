@@ -129,8 +129,12 @@ const ProductScreen = () => {
                     <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'#f8e825'} />
                   </ListGroup.Item>
                   <ListGroup.Item>Price: GHS {product.price}</ListGroup.Item>
+
                   <ListGroup.Item>
-                    Description: {product.description}
+                  <h5><strong>Description:</strong></h5>
+                      <p dangerouslySetInnerHTML={{ __html: product.description }}></p>
+                    
+
                   </ListGroup.Item>
                 </ListGroup>
               </Col>

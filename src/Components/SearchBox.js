@@ -51,9 +51,12 @@ function SearchBox() {
         e.preventDefault();
         if (keyword) {
             navigate(`/?keyword=${keyword}&page=1`);
+            setKeyword('')
+            
         } else {
             navigate(location.pathname);
         }
+        
     };
 
     // const submitHandler = (e) => {
@@ -76,6 +79,7 @@ function SearchBox() {
                     type='text'
                     name='q'
                     onChange={(e) => setKeyword(e.target.value)}
+                    value={keyword}
                     className='mr-sm-2 ml-sm-5'
                 />
 
