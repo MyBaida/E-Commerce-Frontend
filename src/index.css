@@ -53,6 +53,18 @@ margin: 0 auto;
 }
 }
 
+#icon-up{
+  height: 10px;
+  width: 15px;
+  /* padding-right: 10px; */
+  
+}
+
+#icon-down{
+  /* height: 10px; */
+  width: 15px;
+}
+
 .btn-circle{
   border-radius: 15px;
   /* padding: 6px 0px; */
