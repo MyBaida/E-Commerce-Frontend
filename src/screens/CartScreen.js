@@ -6,6 +6,7 @@ import { Row, Col, ListGroup, Image, Form, Button, Card } from 'react-bootstrap'
 import  Message  from '../Components/Message'
 import { addToCart, removeFromCart } from '../actions/cartActions'
 import { useNavigate } from 'react-router-dom'
+import { InputGroup, Input, FormControl } from 'react-bootstrap'
 
 const CartScreen = () => {
 
@@ -70,27 +71,45 @@ const CartScreen = () => {
                         <Col md={3}>
                           <Link to={`/product/${item.product}`}>{item.name}</Link>
                         </Col>
-                        <Col md={2}>GHS {item.price}</Col>
-                        <Col md={3}>
-                          <Form.Control
-                            as="select"
-                            value={item.qty}
-                            onChange={(e) =>
-                              dispatch(
-                                addToCart(item.product, Number(e.target.value))
-                              )
-                            }
-                          >
+                       
+                       <Col md={2}>GHS {item.price}</Col>
 
-                              {[...Array(item.countInStock).keys()].map((x) => (
-                                <option key={x + 1} value={x + 1}>
-                                  {x + 1}
-                                </option>
-                              ))}
-                          </Form.Control>
-                        </Col>
+                     
+                        
+                       <Col md={2}>
+  
+    <Form.Control
+      as="select"
+      value={item.qty}
+      
+      
+      onChange={(e) =>
+        dispatch(
+          addToCart(item.product, Number(e.target.value))
+        )
+      }
+    >
+      {[...Array(item.countInStock).keys()].map((x) => (
+        <option key={x + 1} value={x + 1}>
+          {x + 1}
+        </option>
+      ))}
+    </Form.Control> 
+</Col>
+
+<Col md={1}>
+<InputGroup>
+    <InputGroup.Text style={{display: 'flex',  flexDirection: 'column'}}>
+    <i className="fas fa-chevron-up" onClick={() => dispatch(addToCart(item.product, Math.max(item.qty + 1, 1)))} size='sm'></i>
+     <i className="fas fa-chevron-down" onClick={() => dispatch(addToCart(item.product, Math.min(item.qty - 1, item.countInStock)))} size='sm'></i>
+    </InputGroup.Text>
+    
+  </InputGroup>
+</Col>
                         
                         <Col md={1}>
+
+
                           <Button 
                             type='button'
                             variant='light'
