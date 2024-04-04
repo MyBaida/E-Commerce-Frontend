@@ -252,7 +252,7 @@
 import React, { useState, useEffect } from 'react'; 
 import axios from 'axios';
 import { Link, useParams, useNavigate } from 'react-router-dom'; 
-import { Form, Button } from 'react-bootstrap'; 
+import { Form, Button, Row, Col, Image } from 'react-bootstrap'; 
 import { useDispatch, useSelector } from 'react-redux'; 
 import Loader from '../Components/Loader'; 
 import Message from '../Components/Message'; 
@@ -386,7 +386,9 @@ function ProductEditScreen() {
                         </Form.Group> 
  
                         <Form.Group controlId='formFile'>
+                            {/* <Row> */}
                             <Form.Label>Image</Form.Label>
+                            {/* <Col> */}
                             <Form.Control
                                 type='file'
                                 label='Upload image'
@@ -395,6 +397,9 @@ function ProductEditScreen() {
                                 placeholder='Upload Image'
                                 onChange={uploadFileHandler}
                             />
+                            {/* <Image className='admin' src={product.image} alt={product.name} fluid />
+                            </Col>
+                            </Row> */}
 
                             {uploading && <Loader />}
 
