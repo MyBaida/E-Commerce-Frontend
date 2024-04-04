@@ -23,7 +23,7 @@ const HomeScreen = () => {
     let keyword = location.search
 
     useEffect(() => {
-      dispatch(listMyOrders())
+      // dispatch(listMyOrders())
         dispatch(listProducts(keyword))
         
     }, [dispatch, keyword])

@@ -41,7 +41,7 @@ function ProfileScreen() {
             // window.location.href = '/login'; // Redirect using window.location.href
             navigate('/login')
             }  else{
-                dispatch(listMyOrders())
+                // dispatch(listMyOrders())
                 if(!user || !user.name || success || userInfo._id !== user._id){
                     dispatch({type: USER_UPDATE_PROFILE_RESET})
                     dispatch(getUserDetails('profile'))

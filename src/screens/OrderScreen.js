@@ -8,7 +8,7 @@ import Message from '../Components/Message'
 import Loader from '../Components/Loader'
 
 import { createOrder } from '../actions/orderActions'
-import { getOrderDetails, payOrder, deliverOrder } from '../actions/orderActions'
+import { getOrderDetails, payOrder, deliverOrder, listMyOrders } from '../actions/orderActions'
 import { ORDER_PAY_RESET, ORDER_DELIVER_RESET } from '../constants/orderConstants'
 
 
@@ -48,6 +48,7 @@ const OrderScreen = () => {
     // }
 
     useEffect(() => {
+        dispatch(listMyOrders())
         if (!userInfo) {
             navigate('/login');
         } else {
