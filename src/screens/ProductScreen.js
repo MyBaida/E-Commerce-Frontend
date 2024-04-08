@@ -130,9 +130,13 @@ const ProductScreen = () => {
                   <ListGroup.Item>
                     <Rating value={product.rating} text={`${product.numReviews} reviews`} color={'#f8e825'} />
                   </ListGroup.Item>
-                  <ListGroup.Item>Price: GHS {product.price}</ListGroup.Item>
+                  <ListGroup.Item><strong>Price:</strong> GHS {product.price}</ListGroup.Item>
+
                   <ListGroup.Item>
-                    Description: {product.description}
+                  Description:
+                      <p dangerouslySetInnerHTML={{ __html: product.description }}></p>
+                    
+
                   </ListGroup.Item>
                 </ListGroup>
               </Col>
@@ -313,6 +317,7 @@ const ProductScreen = () => {
           <Form.Control
             as='textarea'
             row='5'
+            placeholder='Comment here'
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           ></Form.Control>
