@@ -131,7 +131,7 @@ const ProductScreen = () => {
                   <ListGroup.Item><strong>Price:</strong> GHS {product.price}</ListGroup.Item>
 
                   <ListGroup.Item>
-                  <h5><strong>Description:</strong></h5>
+                  Description:
                       <p dangerouslySetInnerHTML={{ __html: product.description }}></p>
                     
 
@@ -306,6 +306,7 @@ const ProductScreen = () => {
           <Form.Control
             as='textarea'
             row='5'
+            placeholder='Comment here'
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           ></Form.Control>
