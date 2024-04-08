@@ -10,7 +10,9 @@ import Message from '../Components/Message';
 import Loader from '../Components/Loader';
 import { addToCart } from '../actions/cartActions'
 import { PRODUCT_CREATE_REVIEW_RESET } from '../constants/productConstants'
-
+import { InputGroup } from 'react-bootstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus, faChevronUp, faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 
 const ProductScreen = () => {
@@ -158,8 +160,11 @@ const ProductScreen = () => {
 
 <ListGroup.Item>
 <Row>
-    <Col>Qty</Col>
-    <Col xs='auto' className='my-1'>
+    {/* <Col>Qty</Col> */}
+    <Col xs="auto" className="my-1">
+    <InputGroup className="my-1">
+    <InputGroup.Text>Qty</InputGroup.Text>
+    
         <Form.Control
             as="select"
             value={qty}
@@ -175,6 +180,12 @@ const ProductScreen = () => {
             }
 
         </Form.Control>
+        <InputGroup.Text style={{ display: 'flex', flexDirection: 'column' }}>
+  <FontAwesomeIcon icon={faChevronUp} onClick={() => setQty(qty + 1)} style={{ padding: '0.25rem',}} size='sm' />
+  <FontAwesomeIcon icon={faChevronDown} onClick={() => setQty(qty - 1)} style={{ padding: '0.25rem', }} size='sm' />
+</InputGroup.Text>
+  </InputGroup>
+        
     </Col>
 </Row>
 </ListGroup.Item>

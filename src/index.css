@@ -59,10 +59,24 @@ margin: 0 auto;
   width: 70px;
 }
 
+
 /* .image-file{
   width: 150px;
   border: 1px solid rgb(127, 109, 109);
 } */
+
+#icon-up{
+  height: 10px;
+  width: 15px;
+  /* padding-right: 10px; */
+  
+}
+
+#icon-down{
+  /* height: 10px; */
+  width: 15px;
+}
+
 
 .btn-circle{
   border-radius: 15px;
