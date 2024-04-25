@@ -1,13 +1,17 @@
+import React, {useEffect} from 'react'
+import {useDispatch} from 'react-redux'
 import { useSelector } from 'react-redux'
 import {  useNavigate } from 'react-router-dom'
 import { Col, Row, Button } from 'react-bootstrap'
 import Loader from './Loader'
 import Message from './Message'
+import { listCategories } from '../actions/categoryActions';
 
 
 function CategoryCarousel() {
 
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
     const categoryList = useSelector(state => state.categoryList)
     const {error, loading, categories} = categoryList
@@ -16,6 +20,10 @@ function CategoryCarousel() {
         const lowercaseCategoryName = categoryName.toLowerCase();
         navigate(`/category/${lowercaseCategoryName}/${id}`);
     };
+
+    useEffect(() => {
+        dispatch(listCategories());
+      }, [dispatch]);
 
 
     return (
