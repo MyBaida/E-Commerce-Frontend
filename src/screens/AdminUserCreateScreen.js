@@ -7,9 +7,6 @@ import Loader from '../Components/Loader';
 import Message from '../Components/Message';
 import FormContainer from '../Components/FormContainer';
 import { createUser } from '../actions/userActions';
-// import {USER_CREATE_RESET} from '../constants/userConstants';
-
-
 
 
 function AdminUserCreateScreen() {
@@ -27,31 +24,6 @@ function AdminUserCreateScreen() {
     const userCreate = useSelector(state => state.userCreate);
     const { error, loading, userInfo } = userCreate;
 
-    // const userCreate = useSelector(state => state.userCreate);
-  // const { loading: loadingCreate, error: errorCreate, success: successCreate, user: createdUser } = userCreate
-    
-    // useEffect(() => {
-    //     if (userInfo) {
-    //         window.location.href = redirect; // Redirect using window.location.href
-    //         }
-    //     }, [userInfo, redirect]);
-
-        // useEffect(() => {
-        //     if (userCreateSuccess) {
-        //         dispatch({ type: USER_CREATE_RESET });
-        //         navigate('/admin/userlist');
-        //     } else {
-        //         if (!user || !user.name || user._id !== Number(userId)) {
-        //             dispatch(getUserDetails(userId));
-        //         } else {
-        //             setName(user.name);
-        //             setEmail(user.email);
-        //             setIsAdmin(user.isAdmin);
-        //         }
-        //     }
-        // }, [dispatch, user, userId, userUpdateSuccess, navigate]);
-
-        
 
         useEffect(() => {
             if (userInfo) {
@@ -137,14 +109,7 @@ function AdminUserCreateScreen() {
 
                 </Form>
 
-                {/* <Row className='py-3'>
-                    <Col>
-                        Already have an account? <Link
-                            to={redirect ? `/login?redirect=${redirect}` : '/login'}>
-                            Login
-                        </Link>
-                    </Col>
-                </Row> */}
+               
             </FormContainer>
         </div>
     );
