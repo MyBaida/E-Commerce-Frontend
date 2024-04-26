@@ -44,18 +44,7 @@ const PaymentScreen = () => {
                         <option value="Credit Card">Credit Card</option>
                         <option value="T-Cash">T-Cash</option>
                     </Form.Control>
-                    <Col>
-                    {/* <Form.Check
-                        type='radio'
-                        Label= 'Paypal or Credit Card'
-                        id='paypal'
-                        name='paymentMethod'
-                        checked
-                        onChanged={(e) => setPaymentMethod(e.target.value)}
-                    >
-
-                    </Form.Check> */}
-                    </Col>
+                   
                 </Form.Group>
                 <Button type='submit' variant='primary'>
                     Continue

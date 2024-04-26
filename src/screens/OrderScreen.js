@@ -38,15 +38,6 @@ const OrderScreen = () => {
     const navigate = useNavigate()
 
 
-    // const newCart = { ...cart };
-    // newCart.itemPrice = newCart.cartItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2);
-    // newCart.shippingPrice = (newCart.itemPrice > 150000 ? 0 : 20).toFixed(2);
-    // newCart.totalPrice = Number(newCart.shippingPrice) + Number(newCart.itemPrice);
-
-    // if (!loading && !error) {
-    //     order.itemsPrice = order.orderItems.reduce((acc, item) => acc + item.price * item.qty, 0).toFixed(2)
-    // }
-
     useEffect(() => {
         
         if (!userInfo) {

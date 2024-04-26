@@ -72,16 +72,6 @@ const ProductScreen = () => {
     // dispatch(addToCart(id, qty));
     navigate(`/cart/${id}?qty=${qty}`);
   };
-  
-  
-//   const addToCartHandler = () => {
-//     dispatch(addToCart(id, qty)).then(() => {
-//         navigate(`/cart/${id}?qty=${qty}`);
-//     }).catch((error) => {
-//         // Handle any errors that occur during dispatch or navigation
-//         console.error('An error occurred:', error);
-//     });
-// };
 
   
 
@@ -189,21 +179,7 @@ const ProductScreen = () => {
     </Col>
 </Row>
 </ListGroup.Item>
-    //                 <ListGroup.Item>
-    //                   <Row>
-    //                     <Col>Qty</Col>
-    //                     <Col xs='auto' className='my-1'>
-    //                     <Form.Select value={qty} onChange={(e) => setQty(e.target.value)}>
-    //                       <option>Quantity</option>
-    //                         {[...Array(product.countInStock).keys()].map((x) => (
-    //                             <option key={x + 1} value={x + 1}>
-    //                                 {x + 1}
-    //                             </option>
-    //                             ))}
-    // </Form.Select>
-    //                     </Col>
-    //                   </Row>
-    //                 </ListGroup.Item>
+   
                   )}
 
                   <ListGroup.Item>
@@ -247,48 +223,6 @@ const ProductScreen = () => {
                 {/* {errorProductReview && <Message variant='danger'>{errorProductReview}</Message>} */}
                 {/* {errorMessage && <Message variant='danger'>{errorMessage}</Message>} */}
 
-                {/* {userInfo ? (
-                    <Form onSubmit={submitHandler}>
-                        <Form.Group controlId='rating'>
-                            <Form.Label>Rating</Form.Label>
-                            <Form.Control
-                                as='select'
-                                value={rating}
-                                onChange={(e) => setRating(e.target.value)}
-                            >
-                                <option value=''>Select...</option>
-                                <option value='1'>1 - Poor</option>
-                                <option value='2'>2 - Fair</option>
-                                <option value='3'>3 - Good</option>
-                                <option value='4'>4 - Very Good</option>
-                                <option value='5'>5 - Excellent</option>
-                            </Form.Control>
-                        </Form.Group>
-
-                        <Form.Group controlId='comment'>
-                            <Form.Label>Review</Form.Label>
-                            <Form.Control
-                                as='textarea'
-                                row='5'
-                                placeholder='Comment Here'
-                                value={comment}
-                                onChange={(e) => setComment(e.target.value)}
-                            ></Form.Control>
-                        </Form.Group>
-
-                        <Button
-                            disabled={loadingProductReview}
-                            type='submit'
-                            variant='primary'
-                            className="my-3"
-                        >
-                            Submit
-                        </Button>
-
-                    </Form>
-                ) : (
-                        <Message variant='info'>Please <Link to='/login'>login</Link> to write a review</Message>
-                    )} */}
 
 
 {userInfo ? (
